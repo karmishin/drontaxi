@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DronTaxi</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar" />
+
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:replace="fragments/sidebar :: sidebar" />
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Создание пользователя</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <a th:href="@{/users}" class="btn btn-danger">Отменить</a>
+                </div>
+            </div>
+
+            <form th:action="@{./add}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="username">Логин: </label>
+                    <input placeholder="Логин" id="username" type="text" th:field="*{username}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль: </label>
+                    <input placeholder="Пароль" id="password" type="password" th:field="*{password}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailAddress">E-mail: </label>
+                    <input placeholder="Адрес эл. почты" id="emailAddress" type="email" th:field="*{emailAddress}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">Телефон: </label>
+                    <input placeholder="Номер телефона (+79991234567)" id="phoneNumber" type="text" th:field="*{phoneNumber}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Фамилия: </label>
+                    <input placeholder="Фамилия" id="lastName" type="text" th:field="*{lastName}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">Имя: </label>
+                    <input placeholder="Имя" id="firstName" type="text" th:field="*{firstName}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="patronym">Отчество: </label>
+                    <input placeholder="Отчество" id="patronym" type="text" th:field="*{patronym}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения:</label>
+                    <input placeholder="Дата рождения" id="birthdate" type="date" th:field="*{birthdate}" class="form-control" required>
+                </div>
+
+                <!--
+                <div class="form-group">
+                    <input type="checkbox" id="adminCheckbox" name="adminCheckbox" value="true">
+                    <label for="adminCheckbox">Сделать администратором</label>
+                </div>
+                -->
+
+                <input type="submit" class="btn btn-lg btn-success btn-block" value="Создать пользователя">
+            </form>
+        </main>
+    </div>
+</div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

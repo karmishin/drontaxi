@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DronTaxi</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar" />
+
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:replace="fragments/sidebar :: sidebar" />
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Заказы</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button type="button" class="btn btn-success">Новый заказ</button>
+                </div>
+            </div>
+            <div class="card">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">Пользователь</th>
+                    <th scope="col">Оператор</th>
+                    <th scope="col">Откуда</th>
+                    <th scope="col">Куда</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Т/с</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order: ${orders}">
+                    <th th:text="${order.id}" scope="row"></th>
+                    <td th:text="${order.date}"></td>
+                    <td th:text="${order.user}"></td>
+                    <td th:text="${order.operator}"></td>
+                    <td th:text="${order.departureAddress}"></td>
+                    <td th:text="${order.destinationAddress}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td th:text="${order.drone}"></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </main>
+    </div>
+</div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

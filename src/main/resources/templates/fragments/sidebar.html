@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <th:block th:fragment="sidebar">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/orders' ? 'active':''}" class="nav-link" th:href="@{/orders}">
+                            <span data-feather="home"></span>
+                            Заказы <span class="sr-only">(выбрано)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/profile' ? 'active':''}" class="nav-link" th:href="@{/profile}">
+                            <span data-feather="file"></span>
+                            Профиль
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Управление</span>
+                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/users' ? 'active':''}" class="nav-link" th:href="@{/users}">
+                            <span data-feather="file-text"></span>
+                            Пользователи
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/roles' ? 'active':''}" class="nav-link" th:href="@{/roles}">
+                            <span data-feather="file-text"></span>
+                            Роли
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/drones' ? 'active':''}" class="nav-link" th:href="@{/drones}">
+                            <span data-feather="file-text"></span>
+                            Транспорт
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </th:block>
+</body>
+
+</html>
