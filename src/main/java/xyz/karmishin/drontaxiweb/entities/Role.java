@@ -1,5 +1,6 @@
 package xyz.karmishin.drontaxiweb.entities;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import java.util.Set;
 
+@Data
 @Entity
 public class Role implements GrantedAuthority {
     @Id
@@ -29,38 +31,6 @@ public class Role implements GrantedAuthority {
         this.id = id;
         this.systemName = systemName;
         this.userFriendlyName = userFriendlyName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSystemName() {
-        return systemName;
-    }
-
-    public void setSystemName(String systemName) {
-        this.systemName = systemName;
-    }
-
-    public String getUserFriendlyName() {
-        return userFriendlyName;
-    }
-
-    public void setUserFriendlyName(String userFriendlyName) {
-        this.userFriendlyName = userFriendlyName;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override
