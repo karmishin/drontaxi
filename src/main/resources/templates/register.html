@@ -2,17 +2,6 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Регистрация</title>
-</head>
-<body>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Авторизация</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/static/css/login.css}" />
@@ -27,11 +16,13 @@
     <h1 class="h3 mb-3 font-weight-bold"><img th:src="@{/static/img/Logo_Dron_Taxi.svg}">DRON TAXI</h1>
     <h4 class="h4 mb-4 font-weight-normal">Регистрация</h4>
     <p>Уже есть аккаунт? <a href="/login">Авторизуйтесь</a></p>
-    <div th:if="${errorList}"><div class="alert alert-danger">Возникли ошибки:
+    <div th:if="${errorList}">
+        <div class="alert alert-danger">Возникли ошибки:
         <ul th:each="error: ${errorList}">
             <li th:text="${error.getDefaultMessage()}"></li>
         </ul>
-    </div></div>
+        </div>
+    </div>
 
     <input placeholder="Логин" type="text" th:field="*{username}" class="form-control" required>
     <input placeholder="Пароль" type="password" th:field="*{password}" class="form-control" required>

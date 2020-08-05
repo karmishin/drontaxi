@@ -4,18 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.karmishin.drontaxiweb.entities.Role;
 import xyz.karmishin.drontaxiweb.services.RoleService;
 
 import java.util.List;
 
+@RequestMapping("/roles")
 @Controller
 public class RolesController {
-
     @Autowired
     RoleService roleService;
 
-    @GetMapping("/roles")
+    @GetMapping
     public String roles(Model model) {
         List<Role> roleList = roleService.all();
         model.addAttribute("roles", roleList);
