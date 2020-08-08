@@ -25,15 +25,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/register").not().fullyAuthenticated()
                     .antMatchers("/static/**", "/webjars/**").permitAll()
-                    .antMatchers("/users/**", "/roles/**", "/drones/**").hasRole("ADMIN")
+                    .antMatchers("/users/**", "/roles/**", "/drones/**").hasRole("USER")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .usernameParameter("phoneNumber")
                     .defaultSuccessUrl("/")
                     .permitAll()
                 .and()

@@ -12,29 +12,35 @@
     </style>
 </head>
 <body>
-<form class="form-signin" th:action="@{/register}" th:object="${user}" method="post">
+<form class="form-signin" th:action="@{/register}" method="post">
     <h1 class="h3 mb-3 font-weight-bold"><img th:src="@{/static/img/Logo_Dron_Taxi.svg}">DRON TAXI</h1>
     <h4 class="h4 mb-4 font-weight-normal">Регистрация</h4>
     <p>Уже есть аккаунт? <a href="/login">Авторизуйтесь</a></p>
-    <div th:if="${errorList}">
-        <div class="alert alert-danger">Возникли ошибки:
-        <ul th:each="error: ${errorList}">
-            <li th:text="${error.getDefaultMessage()}"></li>
-        </ul>
-        </div>
+    <div th:if="${error}">
+        <div th:text="${error}"class="alert alert-danger"></div>
     </div>
 
-    <input placeholder="Логин" type="text" th:field="*{username}" class="form-control" required>
-    <input placeholder="Пароль" type="password" th:field="*{password}" class="form-control" required>
-    <input placeholder="Подтверждение пароля" type="password" th:field="*{passwordConfirm}" class="form-control" required>
-    <input placeholder="Адрес эл. почты" type="email" th:field="*{emailAddress}" class="form-control" required>
-    <input placeholder="Номер телефона (+79991234567)" type="text" th:field="*{phoneNumber}" class="form-control" required>
-    <input placeholder="Фамилия" type="text" th:field="*{lastName}" class="form-control" required>
-    <input placeholder="Имя" type="text" th:field="*{firstName}" class="form-control" required>
-    <input placeholder="Отчество" type="text" th:field="*{patronym}" class="form-control" required>
-    <input placeholder="Дата рождения" type="date" th:field="*{birthdate}" class="form-control" required>
+    <div class="form-group">
+        <label for="phoneNumber">Номер телефона: </label>
+        <input name="phoneNumber" placeholder="(в формате +7хххххххххх)" id="phoneNumber" type="text" class="form-control" required>
+    </div>
 
-    <input type="submit" class="btn btn-lg btn-success btn-block" value="Зарегистрироваться">
+    <div class="form-group">
+        <label for="password">Пароль: </label>
+        <input name="password" id="password" type="password" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordConfirm">Подтверждение пароля: </label>
+        <input name="passwordConfirm" id="passwordConfirm" type="password" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="birthdate">Дата рождения: </label>
+        <input name="birthdate" id="birthdate" type="date" class="form-control" required>
+    </div>
+
+    <input type="submit" class="btn btn-lg btn-success btn-block" value="Продолжить">
 </form>
 
 <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

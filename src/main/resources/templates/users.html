@@ -28,8 +28,6 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">ФИО</th>
-                    <th scope="col">E-mail</th>
                     <th scope="col">Телефон</th>
                     <th scope="col">Роли</th>
                     <th scope="col">Действия</th>
@@ -38,8 +36,6 @@
                 <tbody>
                 <tr th:each="user: ${users}">
                     <th th:text="${user.id}" scope="row"></th>
-                    <td th:text="${user.lastName} + ' ' + ${user.firstName} + ' ' + ${user.patronym}"></td>
-                    <td th:text="${user.emailAddress}"></td>
                     <td th:text="${user.phoneNumber}"></td>
                     <td th:text="${user.roles}"></td>
                     <td>

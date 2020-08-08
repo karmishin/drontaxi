@@ -22,11 +22,12 @@
     <form class="form-signin" th:action="@{/login}" method="post">
         <h1 class="h3 mb-3 font-weight-bold"><img th:src="@{/static/img/Logo_Dron_Taxi.svg}">DRON TAXI</h1>
 
-        <div th:if="${param.error}"><div class="alert alert-danger">Неверный логин или пароль</div></div>
+        <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
+        <div th:if="${param.error}"><div class="alert alert-danger">Неверный номер телефона или пароль</div></div>
         <div th:if="${param.logout}"><div class="alert alert-primary">Вы вышли из системы</div></div>
 
-        <label for="inputUsername" class="sr-only">Адрес электронной почты</label>
-        <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Логин" required autofocus>
+        <label for="inputUsername" class="sr-only">Номер телефона</label>
+        <input name="phoneNumber" type="text" id="inputUsername" class="form-control" placeholder="Номер телефона" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <div class="checkbox mb-3">

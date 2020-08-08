@@ -1,35 +1,37 @@
 package xyz.karmishin.drontaxiweb.entities;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
-import java.util.Set;
+import javax.persistence.*;
 
-@Data
 @Entity
 public class Role implements GrantedAuthority {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String systemName, userFriendlyName;
 
-    @Transient
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
-
-    public Role() {}
-
-    public Role(Long id) {
-        this.id = id;
-    }
+    public Role() { }
 
     public Role(Long id, String systemName, String userFriendlyName) {
-        this.id = id;
         this.systemName = systemName;
+        this.userFriendlyName = userFriendlyName;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
+    }
+
+    public String getUserFriendlyName() {
+        return userFriendlyName;
+    }
+
+    public void setUserFriendlyName(String userFriendlyName) {
         this.userFriendlyName = userFriendlyName;
     }
 
