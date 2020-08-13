@@ -19,6 +19,10 @@ public class Role implements GrantedAuthority {
         this.userFriendlyName = userFriendlyName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getSystemName() {
         return systemName;
     }
