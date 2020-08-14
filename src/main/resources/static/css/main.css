@@ -97,7 +97,7 @@ body {
   right: 1rem;
 }
 
-.navbar img {
+.navbar svg {
   width: 2em;
   height: auto;
   padding-right: 10px;
@@ -107,16 +107,14 @@ body {
   color: white;
 }
 
+.previous-orders {
+  margin-top: 1rem;
+}
+
 .table-striped {
   color: white;
   background-color: #973E95;
 }
-
-/*
-.table-striped tr:hover {
-  border: #00bfff solid 1px;
-}
-*/
 
 .table-striped tbody tr:nth-of-type(2n+1) {
   background-color: #AD66A9;

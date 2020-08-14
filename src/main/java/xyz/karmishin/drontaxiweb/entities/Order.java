@@ -15,16 +15,13 @@ public class Order {
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private User operator;
-
     private String departureAddress, destinationAddress;
 
-    private enum Status {
-        EN_ROUTE,
+    public enum Status {
         WAITING,
+        IN_PROGRESS,
         COMPLETE,
-        CANCELLED
+        CANCELED
     }
 
     private Status currentStatus;
@@ -50,14 +47,6 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public User getOperator() {
-        return operator;
-    }
-
-    public void setOperator(User operator) {
-        this.operator = operator;
     }
 
     public String getDepartureAddress() {
