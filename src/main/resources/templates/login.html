@@ -21,7 +21,7 @@
 </head>
 <body>
     <form class="form-signin" th:action="@{/login}" method="post">
-        <h1 class="h3 mb-3 font-weight-bold"><img th:src="@{/static/img/Logo_Dron_Taxi.svg}">DRON TAXI</h1>
+        <h1 class="h3 mb-3 font-weight-bold"><img th:src="@{/static/icons/logo.svg}">DRON TAXI</h1>
 
         <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
         <div th:if="${param.error}"><div class="alert alert-danger">Неверный номер телефона или пароль</div></div>

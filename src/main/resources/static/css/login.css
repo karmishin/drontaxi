@@ -42,9 +42,9 @@ body {
 }
 
 .form-signin img {
-  width: 20%;
+  width: 1em;
   height: auto;
-  padding-right: 10px;
+  margin-right: 0.5em;
 }
 
 .form-signin h1 {
