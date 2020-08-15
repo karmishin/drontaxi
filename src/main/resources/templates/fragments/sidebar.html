@@ -8,20 +8,20 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/orders' ? 'active':''}" class="nav-link" th:href="@{/orders}">
-                            <span data-feather="home"></span>
+                            <img th:src="@{/static/icons/signpost.svg}" alt="Вызвать такси">
                             Вызвать такси
                         </a>
                     </li>
                     <li class="nav-item">
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/profile' ? 'active':''}" class="nav-link" th:href="@{/profile}">
-                            <span data-feather="file"></span>
+                            <img th:src="@{/static/icons/file-person.svg}" alt="Профиль">
                             Профиль
                         </a>
                     </li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Управление</span>
+                    <span>Администрирование</span>
                     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                         <span data-feather="plus-circle"></span>
                     </a>
@@ -29,19 +29,19 @@
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/users' ? 'active':''}" class="nav-link" th:href="@{/users}">
-                            <span data-feather="file-text"></span>
+                            <img th:src="@{/static/icons/people.svg}" alt="Пользователи">
                             Пользователи
                         </a>
                     </li>
                     <li class="nav-item">
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/roles' ? 'active':''}" class="nav-link" th:href="@{/roles}">
-                            <span data-feather="file-text"></span>
+                            <img th:src="@{/static/icons/sliders.svg}" alt="Роли">
                             Роли
                         </a>
                     </li>
                     <li class="nav-item">
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/drones' ? 'active':''}" class="nav-link" th:href="@{/drones}">
-                            <span data-feather="file-text"></span>
+                            <img th:src="@{/static/icons/wrench.svg}" alt="Транспорт">
                             Транспорт
                         </a>
                     </li>
