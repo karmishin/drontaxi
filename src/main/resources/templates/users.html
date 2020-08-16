@@ -18,10 +18,41 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 class="h2">Пользователи</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <a th:href="@{/users/add}"><button type="button" class="btn btn-success">Создать</button></a>
-                </div>
+                <h1 class="h2">Создать пользователя</h1>
+            </div>
+
+            <div class="container">
+                <form th:action="@{/users/add}" method="post">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="phoneNumber">Номер телефона: </label>
+                                <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="password">Пароль: </label>
+                                <input name="password" id="password" type="password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="birthdate">Дата рождения: </label>
+                                <input name="birthdate" id="birthdate" type="date" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input name="isAdmin" id="isAdmin" type="checkbox">
+                        <label for="isAdmin">Назначить администратором</label>
+                    </div>
+                    <input type="submit" class="btn btn-success btn-block" value="Продолжить">
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Список пользователей</h1>
             </div>
 
             <table class="table table-striped table-bordered">
