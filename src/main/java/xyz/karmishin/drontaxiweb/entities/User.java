@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,7 @@ public class User implements UserDetails {
     private String password;
 
     private LocalDate birthdate;
+    private LocalDateTime registrationDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
@@ -33,10 +35,11 @@ public class User implements UserDetails {
 
     }
 
-    public User(String phoneNumber, String password, String birthdate) {
+    public User(String phoneNumber, String password, String birthdate, LocalDateTime registrationDate) {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.birthdate = LocalDate.parse(birthdate);
+        this.registrationDate = registrationDate;
     }
 
     public Long getId() {
@@ -79,6 +82,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     @Override

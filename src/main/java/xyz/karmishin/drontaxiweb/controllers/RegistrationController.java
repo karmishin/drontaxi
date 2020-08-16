@@ -57,7 +57,7 @@ public class RegistrationController {
         }
 
         User user = form.toUser(passwordEncoder);
-        user.setRoles(Collections.singleton(roleRepository.findBySystemName("ROLE_USER")));
+        user.getRoles().add(roleRepository.findBySystemName("ROLE_USER"));
         userRepository.save(user);
 
         model.addAttribute("message", "Регистрация прошла успешно.");
