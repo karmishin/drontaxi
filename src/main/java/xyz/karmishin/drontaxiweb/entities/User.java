@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -70,6 +71,10 @@ public class User implements UserDetails {
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+
+    public String getBirthdateInISO() {
+        return birthdate.format(DateTimeFormatter.ISO_DATE);
     }
 
     public void setBirthdate(LocalDate birthdate) {

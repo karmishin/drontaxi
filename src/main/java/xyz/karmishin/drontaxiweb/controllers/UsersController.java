@@ -4,11 +4,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import xyz.karmishin.drontaxiweb.entities.Role;
 import xyz.karmishin.drontaxiweb.entities.User;
 import xyz.karmishin.drontaxiweb.forms.RegistrationForm;
 import xyz.karmishin.drontaxiweb.repositories.RoleRepository;
 import xyz.karmishin.drontaxiweb.repositories.UserRepository;
+import xyz.karmishin.drontaxiweb.services.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("/users")
@@ -17,11 +20,17 @@ public class UsersController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final UserService userService;
+    private final Role userRole;
+    private final Role adminRole;
 
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserService userService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
+        this.userService = userService;
+        userRole = roleRepository.findBySystemName("ROLE_USER");
+        adminRole = roleRepository.findBySystemName("ROLE_ADMIN");
     }
 
     @GetMapping
@@ -42,13 +51,42 @@ public class UsersController {
 
         User user = registrationForm.toUser(passwordEncoder);
 
-        user.getRoles().add(roleRepository.findBySystemName("ROLE_USER"));
+        user.getRoles().add(userRole);
         if (isAdmin) {
-            user.getRoles().add(roleRepository.findBySystemName("ROLE_ADMIN"));
+            user.getRoles().add(adminRole);
         }
 
         userRepository.save(user);
         return "redirect:/users";
     }
 
+    @GetMapping("{id}/edit")
+    public String editUser(@PathVariable Long id, Model model) {
+        User user = userRepository.getOne(id);
+        model.addAttribute("user", user);
+        model.addAttribute("adminCheckbox", user.getRoles().contains(adminRole));
+
+        return "edit-user";
+    }
+
+    @PostMapping("{id}/edit")
+    public String processEditing(@PathVariable Long id, RegistrationForm form, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
+        User userToUpdate = userRepository.getOne(id);
+
+        if (form.getPassword() != null) {
+            userToUpdate.setPassword(passwordEncoder.encode(form.getPassword()));
+        }
+
+        if (adminCheckbox) {
+            userToUpdate.getRoles().add(adminRole);
+        } else {
+            userToUpdate.getRoles().remove(adminRole);
+        }
+
+        userToUpdate.setPhoneNumber(form.getPhoneNumber());
+        userToUpdate.setBirthdate(LocalDate.parse(form.getBirthdate()));
+        userRepository.save(userToUpdate);
+
+        return "redirect:/users";
+    }
 }
