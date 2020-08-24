@@ -29,6 +29,18 @@ public class Order {
     @ManyToOne
     private Drone drone;
 
+    protected Order() {
+
+    }
+
+    public Order(User user, String departureAddress, String destinationAddress) {
+        this.user = user;
+        this.departureAddress = departureAddress;
+        this.destinationAddress = destinationAddress;
+        date = LocalDateTime.now();
+        currentStatus = Status.WAITING;
+    }
+
     public Long getId() {
         return id;
     }

@@ -3,20 +3,17 @@ package xyz.karmishin.drontaxiweb.forms;
 import xyz.karmishin.drontaxiweb.entities.Order;
 import xyz.karmishin.drontaxiweb.entities.User;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 public class OrderForm {
-    private String departureAddress, destinationAddress;
+
+    @NotBlank(message = "Поле адреса отправления должно быть заполнено.")
+    private String departureAddress;
+    @NotBlank(message = "Поле адреса назначения должно быть заполнено.")
+    private String destinationAddress;
 
     public Order toOrder(User user) {
-        Order order = new Order();
-        order.setDate(LocalDateTime.now());
-        order.setDepartureAddress(departureAddress);
-        order.setDestinationAddress(destinationAddress);
-        order.setCurrentStatus(Order.Status.COMPLETE);
-        order.setUser(user);
-
-        return order;
+        return new Order(user, departureAddress, destinationAddress);
     }
 
     public String getDepartureAddress() {
