@@ -20,17 +20,11 @@ public class UsersController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-    private final UserService userService;
-    private final Role userRole;
-    private final Role adminRole;
 
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, UserService userService) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
-        this.userService = userService;
-        userRole = roleRepository.findBySystemName("ROLE_USER");
-        adminRole = roleRepository.findBySystemName("ROLE_ADMIN");
     }
 
     @GetMapping
@@ -41,7 +35,7 @@ public class UsersController {
     }
 
     @PostMapping("add")
-    public String addUser(RegistrationForm registrationForm, Model model, @RequestParam(value = "isAdmin", required = false) boolean isAdmin) {
+    public String addUser(RegistrationForm registrationForm, Model model, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
         String phoneNumber = registrationForm.getPhoneNumber();
 
         if (userRepository.findByPhoneNumber(phoneNumber) != null) {
@@ -51,9 +45,9 @@ public class UsersController {
 
         User user = registrationForm.toUser(passwordEncoder);
 
-        user.getRoles().add(userRole);
-        if (isAdmin) {
-            user.getRoles().add(adminRole);
+        user.getRoles().add(roleRepository.findBySystemName("ROLE_USER"));
+        if (adminCheckbox) {
+            user.getRoles().add(roleRepository.findBySystemName("ROLE_ADMIN"));
         }
 
         userRepository.save(user);
@@ -64,7 +58,7 @@ public class UsersController {
     public String editUser(@PathVariable Long id, Model model) {
         User user = userRepository.getOne(id);
         model.addAttribute("user", user);
-        model.addAttribute("adminCheckbox", user.getRoles().contains(adminRole));
+        model.addAttribute("adminCheckbox", user.getRoles().contains(roleRepository.findBySystemName("ROLE_ADMIN")));
 
         return "edit-user";
     }
@@ -78,9 +72,9 @@ public class UsersController {
         }
 
         if (adminCheckbox) {
-            userToUpdate.getRoles().add(adminRole);
+            userToUpdate.getRoles().add(roleRepository.findBySystemName("ROLE_ADMIN"));
         } else {
-            userToUpdate.getRoles().remove(adminRole);
+            userToUpdate.getRoles().remove(roleRepository.findBySystemName("ROLE_ADMIN"));
         }
 
         userToUpdate.setPhoneNumber(form.getPhoneNumber());
