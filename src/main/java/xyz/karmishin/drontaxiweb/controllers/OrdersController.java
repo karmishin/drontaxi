@@ -3,15 +3,13 @@ package xyz.karmishin.drontaxiweb.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import xyz.karmishin.drontaxiweb.entities.Order;
 import xyz.karmishin.drontaxiweb.entities.User;
 import xyz.karmishin.drontaxiweb.forms.OrderForm;
 import xyz.karmishin.drontaxiweb.repositories.OrderRepository;
 import xyz.karmishin.drontaxiweb.repositories.UserRepository;
+import xyz.karmishin.drontaxiweb.services.OrderService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -21,11 +19,13 @@ import java.security.Principal;
 public class OrdersController {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final OrderService orderService;
     private User currentUser;
 
-    public OrdersController(OrderRepository orderRepository, UserRepository userRepository) {
+    public OrdersController(OrderRepository orderRepository, UserRepository userRepository, OrderService orderService) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.orderService = orderService;
     }
 
     @ModelAttribute
@@ -40,14 +40,17 @@ public class OrdersController {
         return "orders";
     }
 
+
+
     @PostMapping
-    public String processOrder(@Valid OrderForm orderForm, Errors errors, Principal principal, Model model) {
+    public String processOrder(@Valid OrderForm orderForm, Errors errors) {
         if (errors.hasErrors()) {
             return "orders";
         }
         
         Order order = orderForm.toOrder(currentUser);
         orderRepository.save(order);
-        return "redirect:/orders";
+        orderService.imitateWork(order);
+        return "redirect:/orders/" + order.getId();
     }
 }
