@@ -33,7 +33,7 @@ async function loop() {
     do {
         await updateStatus();
         await sleep(2000);
-    } while (orderStatus != "COMPLETE")
+    } while (orderStatus !== "COMPLETE")
 }
 
 loop();
