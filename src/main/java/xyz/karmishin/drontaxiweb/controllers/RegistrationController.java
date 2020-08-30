@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import xyz.karmishin.drontaxiweb.entities.User;
-import xyz.karmishin.drontaxiweb.forms.RegistrationForm;
+import xyz.karmishin.drontaxiweb.forms.UserForm;
 import xyz.karmishin.drontaxiweb.repositories.RoleRepository;
 import xyz.karmishin.drontaxiweb.repositories.UserRepository;
 
 import java.time.LocalDate;
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/register")
@@ -34,7 +33,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(RegistrationForm form, Model model) {
+    public String processRegistration(UserForm form, Model model) {
         String phoneNumber = form.getPhoneNumber();
         String password = form.getPassword();
         String passwordConfirm = form.getPasswordConfirm();

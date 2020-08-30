@@ -3,9 +3,10 @@ package xyz.karmishin.drontaxiweb.forms;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import xyz.karmishin.drontaxiweb.entities.User;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-public class RegistrationForm {
+public class UserForm {
     protected String phoneNumber, password, birthdate, passwordConfirm;
 
     public User toUser(PasswordEncoder passwordEncoder) {

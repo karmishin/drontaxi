@@ -4,12 +4,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import xyz.karmishin.drontaxiweb.entities.Role;
 import xyz.karmishin.drontaxiweb.entities.User;
-import xyz.karmishin.drontaxiweb.forms.RegistrationForm;
+import xyz.karmishin.drontaxiweb.forms.UserForm;
 import xyz.karmishin.drontaxiweb.repositories.RoleRepository;
 import xyz.karmishin.drontaxiweb.repositories.UserRepository;
-import xyz.karmishin.drontaxiweb.services.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,6 +25,11 @@ public class UsersController {
         this.roleRepository = roleRepository;
     }
 
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("isAdminCheckboxVisible", true);
+    }
+
     @GetMapping
     public String users(Model model) {
         List<User> userList = userRepository.findAll();
@@ -35,7 +38,7 @@ public class UsersController {
     }
 
     @PostMapping("add")
-    public String addUser(RegistrationForm registrationForm, Model model, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
+    public String addUser(UserForm registrationForm, Model model, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
         String phoneNumber = registrationForm.getPhoneNumber();
 
         if (userRepository.findByPhoneNumber(phoneNumber) != null) {
@@ -64,7 +67,7 @@ public class UsersController {
     }
 
     @PostMapping("{id}/edit")
-    public String processEditing(@PathVariable Long id, RegistrationForm form, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
+    public String processEditing(@PathVariable Long id, UserForm form, @RequestParam(value = "adminCheckbox", required = false) boolean adminCheckbox) {
         User userToUpdate = userRepository.getOne(id);
 
         if (form.getPassword() != null) {
