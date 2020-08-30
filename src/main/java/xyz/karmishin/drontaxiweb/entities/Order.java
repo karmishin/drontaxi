@@ -18,10 +18,16 @@ public class Order {
     private String departureAddress, destinationAddress;
 
     public enum Status {
-        WAITING,
-        IN_PROGRESS,
-        COMPLETE,
-        CANCELED
+        WAITING("Ожидание свободного дрона"),
+        IN_PROGRESS("В процессе выполнения"),
+        COMPLETE("Выполнен"),
+        CANCELED("Отменён");
+
+        public final String userFriendlyName;
+
+        Status(String userFriendlyName) {
+            this.userFriendlyName = userFriendlyName;
+        }
     }
 
     private Status currentStatus;

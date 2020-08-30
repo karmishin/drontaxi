@@ -38,11 +38,11 @@
                 </tr>
                 <tr>
                     <th scope="row">Дрон:</th>
-                    <td>Ещё не назначен</td>
+                    <td>Ещё не назначен</td> <!-- TODO -->
                 </tr>
                 <tr>
                     <th scope="row">Статус:</th>
-                    <td id="statusParagraph" th:text="${order.currentStatus}"></td>
+                    <td id="statusParagraph" th:text="${order.currentStatus.userFriendlyName}"></td>
                 </tr>
                 </tbody>
             </table>

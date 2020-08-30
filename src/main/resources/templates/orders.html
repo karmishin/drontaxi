@@ -75,7 +75,7 @@
                         <td scope="row"><a th:href="@{/orders/} + ${order.id}" class="order-link"><span th:text="${order.date}"></span><img th:src="@{/static/icons/arrow-up-right-square.svg}" style="padding-left: 5px;"></a></td>
                         <td th:text="${order.departureAddress}"></td>
                         <td th:text="${order.destinationAddress}"></td>
-                        <td th:text="${order.currentStatus}"></td>
+                        <td th:text="${order.currentStatus.userFriendlyName}"></td>
                     </tr>
                     </tbody>
                 </table>
